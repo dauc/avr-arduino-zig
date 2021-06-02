@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: euantorano/zig:0.7.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Check Version
+        run: zig version
+
+      - name: Build
+        run: zig build --verbose
