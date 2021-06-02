@@ -33,7 +33,7 @@ pub fn build(b: *Builder) !void {
     };
 
     const upload = b.step("upload", "Upload the code to an Arduino device using avrdude");
-    const avrdude = b.addSystemCommand(&.{
+    const avrdude = b.addSystemCommand(&[_][]const u8{
         "avrdude",
         "-carduino",
         "-patmega328p",
@@ -46,7 +46,7 @@ pub fn build(b: *Builder) !void {
     avrdude.step.dependOn(&exe.install_step.?.step);
 
     const objdump = b.step("objdump", "Show dissassembly of the code using avr-objdump");
-    const avr_objdump = b.addSystemCommand(&.{
+    const avr_objdump = b.addSystemCommand(&[_][]const u8{
         "avr-objdump",
         "-dh",
         bin_path,
@@ -55,7 +55,7 @@ pub fn build(b: *Builder) !void {
     avr_objdump.step.dependOn(&exe.install_step.?.step);
 
     const monitor = b.step("monitor", "Opens a monitor to the serial output");
-    const screen = b.addSystemCommand(&.{
+    const screen = b.addSystemCommand(&[_][]const u8{
         "screen",
         tty,
         "115200",
