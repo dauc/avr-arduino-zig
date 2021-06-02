@@ -5,7 +5,7 @@ const gpio = @import("gpio.zig");
 var ch: u8 = '!';
 
 // This ends up in the bss section
-var bss_stuff: [9]u8 = .{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+var bss_stuff: [9]u8 = [_]u8{ 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 pub fn main() void {
     uart.init(115200);
